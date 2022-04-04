@@ -1,0 +1,3 @@
+body-parser irá converter os dados que irá chegar no corpo da requisiçao. tipos post para json
+
+
