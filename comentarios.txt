@@ -1,0 +1,53 @@
+body-parser irá converter os dados que irá chegar no corpo da requisiçao. tipos post para json
+
+npx sequelize-cli model:create --name Pessoas --attributes nome:string,ativo:boolean,email:string,role:string
+criou dois arquivos nas minhas pastas anteriormente criadas pelo sequelize
+
+os tipos de dados do Sequelize estão de acordo com os equivalentes no MySQL, 
+ com atenção para o tipo date do MySQL que se torna `dateonly' para o Sequelize.
+
+migração de dados:
+    transferecia de dados entre plataformas
+
+migração com ORM:
+    alterações incrementais e restreáveis no banco
+        pode voltar a tabela à forma anterior (reverter)
+        coordenar alterações feitas por pessoas diferentes do time nas mesmas tabelas do banco
+
+
+Quando usamos ORMs (como o Sequelize) ou outros frameworks (como o Rails se estiver trabalhando com a linguagem Ruby)
+ para trabalhar com os bancos de dados, o comportamento padrão dessas ferramentas é “pluralizar”
+Ou seja, quando criamos a tabela Person (Pessoa em inglês) através do Sequelize, ele vai se conectar ao banco e criar a tabela com o nome de People (Pessoas em inglês).
+ Isso vale para qualquer nome: Name (Nome) se torna Names (Nomes) e por aí vai.
+
+Utilizando a opção freezeTableName para “congelar” o nome da tabela, assim o Sequelize não vai tentar pluralizar:
+
+sequelize.define('User', {
+  // ... (attributes)
+}, {
+  freezeTableName: true
+});
+
+
+Definindo o nome da tabela manualmente:
+
+sequelize.define('User', {
+  // ... (attributes)
+}, {
+  tableName: 'Employees'
+});
+
+ npx sequelize-cli db:migrate
+ usado para conectar a masta migrations ao MySQL. No caso vou ter que criar um noso usuário mySQL porque deu erro de access.
+
+
+ posso por exemplo inserir dados no MySQL pelo proprio banco de dados. Exemplo se eu fosse inserir em Pessoas.
+ mysql> insert into Pessoas (nome, ativo, email, role, createdAt, updateAt) values ("humberto", 1//que no caso é booleano, "huberti@humberto", "estudante", NOW(), NOW())
+
+dessa forma é trabalhoso e por isso será usado recurso do MySQL
+ dos arquivos seeders(semente), e que também ta disponivel no sequelize-cli. linha de comando.
+
+npx sequelize-cli seed:generate --name demo-pessoa
+ criou uma nova semente no caminha seeders
+
+
