@@ -35,3 +35,5 @@ db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
 module.exports = db;
+
+//gerencia os modelos do banco
